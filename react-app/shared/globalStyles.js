@@ -9,6 +9,12 @@ const globalStyles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: colors.APP_ALTERNATE_BG_COLOR,
   },
+  containerDark: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.APP_PRIMARY_BG_COLOR,
+  },
   centeredContent: {
     flex: 1,
     marginTop: 0,
@@ -30,11 +36,13 @@ const globalStyles = StyleSheet.create({
     color: colors.APP_PRIMARY_LIGHT_BG_COLOR,
   },
   appLogoLarge: {
-    width: '90%',
+    width: constants.LARGE_ELEM_DIMS * 1.5,
+    height: constants.LARGE_ELEM_DIMS * 1.5,
     resizeMode: 'contain',
   },
   appLogoSmall: {
-    width: '40%',
+    width: constants.MEDIUM_ELEM_DIMS * 1.5,
+    height: constants.MEDIUM_ELEM_DIMS * 1.5,
     resizeMode: 'contain',
   },
   appMenuIcon: {
