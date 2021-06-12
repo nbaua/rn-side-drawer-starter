@@ -5,16 +5,14 @@ import {
   Image,
   Keyboard,
   KeyboardAvoidingView,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import globalColors from '../../shared/globalColors';
-import globalConstants from '../../shared/globalConstants';
-import globalResources from '../../shared/globalResources';
-import globalStyles from '../../shared/globalStyles';
+import colors from '../../shared/globalColors';
+import resources from '../../shared/globalResources';
+import styles from '../../shared/globalStyles';
 
 const LoginScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
@@ -64,95 +62,61 @@ const LoginScreen = ({navigation}) => {
   };
 
   return (
-    <View style={globalStyles.containerDark}>
+    <View style={styles.containerDark}>
       <KeyboardAvoidingView enabled>
-        <Image
-          source={globalResources.APP_LOGO}
-          style={globalStyles.appLogoSmall}
-        />
+        <Image source={resources.APP_LOGO} style={styles.appLogoSmall} />
+        <View style={styles.autoSection}>
+          <View>
+            <TextInput
+              allowFontScaling={true}
+              underlineColorAndroid="transparent"
+              style={styles.inputStyle}
+              placeholder="Enter Email."
+              placeholderTextColor={colors.APP_DARK_TINT_COLOR}
+              autoCapitalize="none"
+              keyboardType="email-address"
+              returnKeyType="next"
+              onChangeText={UserEmail => setUserEmail(UserEmail)}
+              onSubmitEditing={() =>
+                passwordInputRef.current && passwordInputRef.current.focus()
+              }
+              textAlignVertical="center"
+              blurOnSubmit={false}
+            />
+          </View>
 
-        <View style={styles.containerDark}>
-          <TextInput
-            style={styles.inputStyle}
-            placeholder="Enter Email."
-            placeholderTextColor={globalColors.APP_DARK_TINT_COLOR}
-            autoCapitalize="none"
-            keyboardType="email-address"
-            returnKeyType="next"
-            onChangeText={UserEmail => setUserEmail(UserEmail)}
-            onSubmitEditing={() =>
-              passwordInputRef.current && passwordInputRef.current.focus()
-            }
-            blurOnSubmit={false}
-          />
+          <View>
+            <TextInput
+              allowFontScaling={true}
+              underlineColorAndroid="transparent"
+              style={styles.inputStyle}
+              placeholder="Enter Password."
+              ref={passwordInputRef}
+              placeholderTextColor={colors.APP_DARK_TINT_COLOR}
+              secureTextEntry={true}
+              onChangeText={UserPassword => setUserPassword(UserPassword)}
+              onSubmitEditing={Keyboard.dismiss}
+              textAlignVertical="center"
+              blurOnSubmit={false}
+            />
+          </View>
+
+          <TouchableOpacity
+            style={[styles.buttonStyle]}
+            onPress={handleSubmitPress}>
+            <Text style={styles.buttonTextStyle}>LOGIN</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate('RegisterScreen')}>
+            <Text style={styles.linkTextStyle}>No Account? Register</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.linkTextStyle}>Forgot Password?</Text>
+          </TouchableOpacity>
         </View>
-
-        <View style={styles.containerDark}>
-          <TextInput
-            style={styles.inputStyle}
-            placeholder="Enter Password."
-            ref={passwordInputRef}
-            placeholderTextColor={globalColors.APP_DARK_TINT_COLOR}
-            secureTextEntry={true}
-            onChangeText={UserPassword => setUserPassword(UserPassword)}
-            onSubmitEditing={Keyboard.dismiss}
-            blurOnSubmit={false}
-          />
-        </View>
-
-        <TouchableOpacity
-          style={[styles.buttonStyle]}
-          onPress={handleSubmitPress}>
-          <Text style={styles.buttonTextStyle}>LOGIN</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
-          <Text style={styles.linkTextStyle}>No Account? Register</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.linkTextStyle}>Forgot Password?</Text>
-        </TouchableOpacity>
       </KeyboardAvoidingView>
     </View>
   );
 };
 export default LoginScreen;
-
-const styles = StyleSheet.create({
-  buttonStyle: {
-    backgroundColor: globalColors.APP_PRIMARY_LIGHT_BG_COLOR,
-    borderColor: globalColors.APP_PRIMARY_LIGHT_BG_COLOR,
-    borderWidth: 0,
-    alignItems: 'center',
-    borderRadius: globalConstants.SMALL_BORDER_RADIUS,
-    paddingTop: globalConstants.DEFAULT_PADDING / 2,
-    marginVertical: globalConstants.DEFAULT_MARGIN,
-  },
-  buttonTextStyle: {
-    fontSize: globalConstants.NORMAL_FONT_SIZE,
-    fontFamily: globalConstants.DEFAULT_REGULAR_FONT,
-    color: globalColors.APP_PRIMARY_TEXT_COLOR,
-  },
-  inputStyle: {
-    fontFamily: globalConstants.DEFAULT_REGULAR_FONT,
-    backgroundColor: globalColors.APP_PRIMARY_LIGHT_BG_COLOR,
-    color: globalColors.APP_PRIMARY_TEXT_COLOR,
-    borderRadius: globalConstants.SMALL_BORDER_RADIUS,
-    borderColor: globalColors.APP_PRIMARY_DARK_BG_COLOR,
-    paddingHorizontal: globalConstants.DEFAULT_PADDING,
-    marginTop: globalConstants.DEFAULT_MARGIN,
-    borderWidth: 1,
-  },
-  linkTextStyle: {
-    textAlign: 'center',
-    alignSelf: 'center',
-    color: globalColors.APP_ALTERNATE_TEXT_COLOR,
-    fontSize: globalConstants.NORMAL_FONT_SIZE,
-    fontFamily: globalConstants.DEFAULT_REGULAR_FONT,
-  },
-  errorTextStyle: {
-    color: 'red',
-    textAlign: 'center',
-    fontSize: globalConstants.NORMAL_FONT_SIZE,
-  },
-});
