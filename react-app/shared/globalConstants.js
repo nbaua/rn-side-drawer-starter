@@ -12,7 +12,7 @@ export default {
   DEFAULT_BOLD_FONT: 'BalooTammudu2-Bold',
 
   SMALL_FONT_SIZE: 10,
-  NORMAL_FONT_SIZE: 16,
+  NORMAL_FONT_SIZE: 18,
   MEDIUM_FONT_SIZE: 26,
   LARGE_FONT_SIZE: 36,
 
